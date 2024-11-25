@@ -12,7 +12,6 @@ document.getElementById('convert').addEventListener('click', function() {
     const file = fileInput.files[0];
     const img = new Image();
     img.onload = function() {
-        // Menampilkan gambar asli
         document.getElementById('originalImage').src = img.src;
 
         canvas.width = img.width;
@@ -30,7 +29,6 @@ document.getElementById('convert').addEventListener('click', function() {
         }
         ctx.putImageData(imageData, 0, 0);
         
-        // Menampilkan gambar hasil konversi
         document.getElementById('convertedImage').src = canvas.toDataURL();
         document.getElementById('results').style.display = 'block';
     };
@@ -53,19 +51,17 @@ function blur(imageData) {
     const height = imageData.height;
     const tempData = new Uint8ClampedArray(data.length);
     
-    // Loop melalui setiap piksel
     for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
             const i = (y * width + x) * 4;
-
-            // Menghitung rata-rata dengan lebih banyak piksel di sekitar
+            
             const rSum = 
                 data[i - 4 - width * 4] + data[i - 4 + width * 4] + 
                 data[i + 4 - width * 4] + data[i + 4 + width * 4] + 
                 data[i - 4] + data[i + 4] + 
                 data[i - width * 4] + data[i + width * 4] +
-                data[i - 4 - 2 * width * 4] + data[i + 4 - 2 * width * 4] + // Piksel di atas dan bawah
-                data[i - 4 + 2 * width * 4] + data[i + 4 + 2 * width * 4]; // Piksel di atas dan bawah
+                data[i - 4 - 2 * width * 4] + data[i + 4 - 2 * width * 4] + 
+                data[i - 4 + 2 * width * 4] + data[i + 4 + 2 * width * 4]; 
 
             const gSum = 
                 data[i - 4 - width * 4 + 1] + data[i - 4 + width * 4 + 1] + 
@@ -83,15 +79,14 @@ function blur(imageData) {
                 data[i - 4 - 2 * width * 4 + 2] + data[i + 4 - 2 * width * 4 + 2] + 
                 data[i - 4 + 2 * width * 4 + 2] + data[i + 4 + 2 * width * 4 + 2];
 
-            // Menghitung rata-rata
-            const r = rSum / 12; // Menghitung rata-rata dari 12 piksel
+            const r = rSum / 12; 
             const g = gSum / 12;
             const b = bSum / 12;
 
             tempData[i] = r;
             tempData[i + 1] = g;
             tempData[i + 2] = b;
-            tempData[i + 3] = data[i + 3]; // Alpha
+            tempData[i + 3] = data[i + 3];
         }
     }
     for (let i = 0; i < data.length; i++) {
