@@ -22,7 +22,6 @@ document.getElementById('convert').addEventListener('click', function() {
         if (filter === 'grayscale') {
             grayscale(imageData);
         } else if (filter === 'blur') {
-            // Menerapkan blur beberapa kali untuk efek yang lebih kuat
             for (let i = 0; i < 15; i++) { // Ubah jumlah iterasi untuk meningkatkan blur
                 blur(imageData);
             }
