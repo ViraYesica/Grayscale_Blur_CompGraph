@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter</title>
+    <style>
+        #results {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .small-image {
+            width: 150px; /* Ukuran gambar hasil konversi */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Converter</h1>
+    <input type="file" id="upload" accept="image/*">
+    <select id="filter">
+        <option value="grayscale">Grayscale</option>
+        <option value="blur">Blur</option>
+    </select>
+    <button id="convert">Convert</button>
+
+    <div id="results" style="display: none;">
+        <div>
+            <h2>Original Image</h2>
+            <img id="originalImage" class="small-image" src="" alt="Original Image">
+        </div>
+        <div>
+            <h2>Converted Image</h2>
+            <img id="convertedImage" class="small-image" src="" alt="Converted Image">
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
